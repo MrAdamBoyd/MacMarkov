@@ -32,33 +32,17 @@ class MarkovGenerator {
     convenience init(fileName: String) {
         let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "txt")!
         
-        let cleanedText = (try! String(contentsOfFile: path, encoding: NSUTF8StringEncoding)).componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "\n.")).map { $0.lowercaseString}
-        let sentenceArray = cleanedText.map({ $0.componentsSeparatedByString(" ") })
+        let separatedText = (try! String(contentsOfFile: path, encoding: NSUTF8StringEncoding)).componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "\n.")).map { $0.lowercaseString }
+        //There has to be a better way of doing this, will fix later
+        let cleanText1 = separatedText.map({ $0.stringByReplacingOccurrencesOfString(";", withString: "") })
+        let cleanText2 = cleanText1.map({ $0.stringByReplacingOccurrencesOfString(":", withString: "") })
+        let cleanText3 = cleanText2.map({ $0.stringByReplacingOccurrencesOfString(",", withString: "") })
+        let cleanText4 = cleanText3.map({ $0.stringByReplacingOccurrencesOfString("?", withString: "") })
+        let cleanText5 = cleanText4.map({ $0.stringByReplacingOccurrencesOfString("!", withString: "") })
+        
+        let sentenceArray = cleanText5.map({ $0.componentsSeparatedByString(" ") })
         
         //At this point, we have an array of an array of string. Each outer array is a sentence and contains an inner array of words in each sentence
-        self.init(sentences: sentenceArray)
-    }
-    
-    /**
-     Initiailze with an array of filenames
-     
-     - parameter fileNames: array of filenames to analyze
-     
-     - returns: self
-     */
-    convenience init(fileNames: [String]) {
-        var sentenceArray: [[String]] = [[]]
-        
-        for fileName in fileNames {
-            let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "txt")!
-            let cleanedText = (try! String(contentsOfFile: path, encoding: NSUTF8StringEncoding)).componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "\n.")).map { $0.lowercaseString}
-            
-            let cleanArray = cleanedText.map({ $0.componentsSeparatedByString(" ") })
-            for sentence in cleanArray {
-                sentenceArray.append(sentence)
-            }
-        }
-        
         self.init(sentences: sentenceArray)
     }
     
@@ -152,7 +136,7 @@ class MarkovGenerator {
             if currentWord == "$" {
                 if i > self.minSentenceLength {
                     let resultString = result.reduce("", combine: { "\($0) \($1)" })
-                    return resultString
+                    return "\(resultString)."
                 } else {
                     currentWord = self.randomWord()
                 }
@@ -163,6 +147,7 @@ class MarkovGenerator {
         
         
         let resultString = result.reduce("", combine: { "\($0) \($1)" })
-        return resultString
+        return "\(resultString)."
     }
+    
 }
