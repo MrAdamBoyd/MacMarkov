@@ -14,6 +14,7 @@
 		66E8F0AC1C8BD9BE00540DF1 /* MarkovGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E8F0AB1C8BD9BE00540DF1 /* MarkovGenerator.swift */; };
 		66E8F0AE1C8BD9FD00540DF1 /* allshakespeare.txt in Resources */ = {isa = PBXBuildFile; fileRef = 66E8F0AD1C8BD9FD00540DF1 /* allshakespeare.txt */; };
 		66E8F0B01C8BDB8A00540DF1 /* testshakespeare.txt in Resources */ = {isa = PBXBuildFile; fileRef = 66E8F0AF1C8BDB8A00540DF1 /* testshakespeare.txt */; };
+		66E8F0B41C8BE91B00540DF1 /* String+SentenceCaseString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E8F0B31C8BE91B00540DF1 /* String+SentenceCaseString.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		66E8F0AB1C8BD9BE00540DF1 /* MarkovGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkovGenerator.swift; sourceTree = "<group>"; };
 		66E8F0AD1C8BD9FD00540DF1 /* allshakespeare.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = allshakespeare.txt; sourceTree = "<group>"; };
 		66E8F0AF1C8BDB8A00540DF1 /* testshakespeare.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testshakespeare.txt; sourceTree = "<group>"; };
+		66E8F0B31C8BE91B00540DF1 /* String+SentenceCaseString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SentenceCaseString.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 				66E8F09C1C8BD98800540DF1 /* AppDelegate.swift */,
 				66E8F09E1C8BD98800540DF1 /* ViewController.swift */,
 				66E8F0AB1C8BD9BE00540DF1 /* MarkovGenerator.swift */,
+				66E8F0B31C8BE91B00540DF1 /* String+SentenceCaseString.swift */,
 				66E8F0AD1C8BD9FD00540DF1 /* allshakespeare.txt */,
 				66E8F0AF1C8BDB8A00540DF1 /* testshakespeare.txt */,
 				66E8F0A01C8BD98800540DF1 /* Assets.xcassets */,
@@ -146,6 +149,7 @@
 				66E8F09F1C8BD98800540DF1 /* ViewController.swift in Sources */,
 				66E8F0AC1C8BD9BE00540DF1 /* MarkovGenerator.swift in Sources */,
 				66E8F09D1C8BD98800540DF1 /* AppDelegate.swift in Sources */,
+				66E8F0B41C8BE91B00540DF1 /* String+SentenceCaseString.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

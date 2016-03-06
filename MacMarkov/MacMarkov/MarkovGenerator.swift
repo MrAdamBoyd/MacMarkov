@@ -135,7 +135,7 @@ class MarkovGenerator {
             
             if currentWord == "$" {
                 if i > self.minSentenceLength {
-                    let resultString = result.reduce("", combine: { "\($0) \($1)" })
+                    let resultString = result.reduce("", combine: { "\($0) \($1)" }).sentenceCaseString
                     return "\(resultString)."
                 } else {
                     currentWord = self.randomWord()
@@ -146,7 +146,7 @@ class MarkovGenerator {
         }
         
         
-        let resultString = result.reduce("", combine: { "\($0) \($1)" })
+        let resultString = result.reduce("", combine: { "\($0) \($1)" }).sentenceCaseString
         return "\(resultString)."
     }
     
