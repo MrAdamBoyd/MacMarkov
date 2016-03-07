@@ -33,6 +33,7 @@ class MarkovGenerator {
         let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "txt")!
         
         let separatedText = (try! String(contentsOfFile: path, encoding: NSUTF8StringEncoding)).componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "\n.")).map { $0.lowercaseString }
+        
         //There has to be a better way of doing this, will fix later
         let cleanText1 = separatedText.map({ $0.stringByReplacingOccurrencesOfString(";", withString: "") })
         let cleanText2 = cleanText1.map({ $0.stringByReplacingOccurrencesOfString(":", withString: "") })
@@ -135,8 +136,8 @@ class MarkovGenerator {
             
             if currentWord == "$" {
                 if i > self.minSentenceLength {
-                    let resultString = result.reduce("", combine: { "\($0) \($1)" }).sentenceCaseString
-                    return "\(resultString)."
+                    let resultString = result.reduce("", combine: { ($0=="") ? "\($0)\($1)" : "\($0) \($1)" })
+                    return "\(resultString.sentenceCaseString)."
                 } else {
                     currentWord = self.randomWord()
                 }
@@ -146,8 +147,8 @@ class MarkovGenerator {
         }
         
         
-        let resultString = result.reduce("", combine: { "\($0) \($1)" }).sentenceCaseString
-        return "\(resultString)."
+        let resultString = result.reduce("", combine: { ($0=="") ? "\($0)\($1)" : "\($0) \($1)" })
+        return "\(resultString.sentenceCaseString)."
     }
     
 }

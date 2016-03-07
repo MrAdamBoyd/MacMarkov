@@ -10,16 +10,34 @@ import Cocoa
 
 class ViewController: NSViewController {
 
-//    let markov = MarkovGenerator(fileName: "allshakespeare")
-    let markov = MarkovGenerator(fileName: "testshakespeare")
+    var markov: MarkovGenerator!
     
     @IBOutlet weak var textField: NSTextField!
     @IBOutlet weak var generateButton: NSButton!
     @IBOutlet weak var resultLabel: NSTextField!
+    @IBOutlet weak var spinner: NSProgressIndicator!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.spinner.startAnimation(self)
+        self.textField.enabled = false
+        self.generateButton.enabled = false
+        self.resultLabel.enabled = false
+        
+        let priority = DISPATCH_QUEUE_PRIORITY_DEFAULT
+        dispatch_async(dispatch_get_global_queue(priority, 0)) {
+            self.markov = MarkovGenerator(fileName: "someshakespeare")
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                //When done loading, stop the spinner
+                self.spinner.stopAnimation(self)
+                self.spinner.hidden = true
+                self.textField.enabled = true
+                self.generateButton.enabled = true
+                self.resultLabel.enabled = true
+            }
+        }
         // Do any additional setup after loading the view.
     }
 

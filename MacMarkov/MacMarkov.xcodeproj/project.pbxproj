@@ -13,7 +13,7 @@
 		66E8F0A41C8BD98800540DF1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 66E8F0A21C8BD98800540DF1 /* Main.storyboard */; };
 		66E8F0AC1C8BD9BE00540DF1 /* MarkovGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E8F0AB1C8BD9BE00540DF1 /* MarkovGenerator.swift */; };
 		66E8F0AE1C8BD9FD00540DF1 /* allshakespeare.txt in Resources */ = {isa = PBXBuildFile; fileRef = 66E8F0AD1C8BD9FD00540DF1 /* allshakespeare.txt */; };
-		66E8F0B01C8BDB8A00540DF1 /* testshakespeare.txt in Resources */ = {isa = PBXBuildFile; fileRef = 66E8F0AF1C8BDB8A00540DF1 /* testshakespeare.txt */; };
+		66E8F0B01C8BDB8A00540DF1 /* someshakespeare.txt in Resources */ = {isa = PBXBuildFile; fileRef = 66E8F0AF1C8BDB8A00540DF1 /* someshakespeare.txt */; };
 		66E8F0B41C8BE91B00540DF1 /* String+SentenceCaseString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 66E8F0B31C8BE91B00540DF1 /* String+SentenceCaseString.swift */; };
 /* End PBXBuildFile section */
 
@@ -26,7 +26,7 @@
 		66E8F0A51C8BD98800540DF1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		66E8F0AB1C8BD9BE00540DF1 /* MarkovGenerator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MarkovGenerator.swift; sourceTree = "<group>"; };
 		66E8F0AD1C8BD9FD00540DF1 /* allshakespeare.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = allshakespeare.txt; sourceTree = "<group>"; };
-		66E8F0AF1C8BDB8A00540DF1 /* testshakespeare.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = testshakespeare.txt; sourceTree = "<group>"; };
+		66E8F0AF1C8BDB8A00540DF1 /* someshakespeare.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = someshakespeare.txt; sourceTree = "<group>"; };
 		66E8F0B31C8BE91B00540DF1 /* String+SentenceCaseString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+SentenceCaseString.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -65,7 +65,7 @@
 				66E8F0AB1C8BD9BE00540DF1 /* MarkovGenerator.swift */,
 				66E8F0B31C8BE91B00540DF1 /* String+SentenceCaseString.swift */,
 				66E8F0AD1C8BD9FD00540DF1 /* allshakespeare.txt */,
-				66E8F0AF1C8BDB8A00540DF1 /* testshakespeare.txt */,
+				66E8F0AF1C8BDB8A00540DF1 /* someshakespeare.txt */,
 				66E8F0A01C8BD98800540DF1 /* Assets.xcassets */,
 				66E8F0A21C8BD98800540DF1 /* Main.storyboard */,
 				66E8F0A51C8BD98800540DF1 /* Info.plist */,
@@ -105,7 +105,6 @@
 				TargetAttributes = {
 					66E8F0981C8BD98800540DF1 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 6GHQ7P7EHA;
 					};
 				};
 			};
@@ -135,7 +134,7 @@
 				66E8F0A11C8BD98800540DF1 /* Assets.xcassets in Resources */,
 				66E8F0AE1C8BD9FD00540DF1 /* allshakespeare.txt in Resources */,
 				66E8F0A41C8BD98800540DF1 /* Main.storyboard in Resources */,
-				66E8F0B01C8BDB8A00540DF1 /* testshakespeare.txt in Resources */,
+				66E8F0B01C8BDB8A00540DF1 /* someshakespeare.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -290,6 +289,7 @@
 				66E8F0AA1C8BD98800540DF1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

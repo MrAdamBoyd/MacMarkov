@@ -702,6 +702,9 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="xPe-Cv-DVx">
+                                <rect key="frame" x="232" y="82" width="16" height="16"/>
+                            </progressIndicator>
                         </subviews>
                         <constraints>
                             <constraint firstItem="7rm-Cy-cxd" firstAttribute="top" secondItem="6Q8-wD-XsL" secondAttribute="bottom" constant="20" id="06f-No-CHU"/>
@@ -717,6 +720,7 @@
                     <connections>
                         <outlet property="generateButton" destination="6Q8-wD-XsL" id="eaR-Mu-cGp"/>
                         <outlet property="resultLabel" destination="7rm-Cy-cxd" id="SU5-yx-pVE"/>
+                        <outlet property="spinner" destination="xPe-Cv-DVx" id="hzH-JR-cyy"/>
                         <outlet property="textField" destination="2um-UQ-0aH" id="7BB-vs-UFu"/>
                     </connections>
                 </viewController>
