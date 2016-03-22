@@ -11,7 +11,7 @@ import Foundation
 class MarkovGenerator {
     
     private let sentences: [[String]]
-    private var transitionTable: [String : [String]] = [:]
+    private var transitionTable: [String : [String : Int]] = [:]
     
     var minSentenceLength = 3
     var maxSentenceLength = 20
@@ -72,12 +72,17 @@ class MarkovGenerator {
                 nextWord = String(sentence[index + 1])
             }
             
+            //The array for the word
             var transitionsArray = self.transitionTable[word]
             if (transitionsArray == nil) {
-                transitionsArray = []
+                transitionsArray = [:]
             }
             
-            transitionsArray?.append(nextWord)
+            if transitionsArray![nextWord] != nil {
+                transitionsArray![nextWord]! += 1
+            } else {
+                transitionsArray![nextWord] = 1
+            }
             
             self.transitionTable[word] = transitionsArray
             
@@ -92,10 +97,19 @@ class MarkovGenerator {
      - returns: new word randomly chosen based on analyzed text
      */
     private func generateNextWord(word: String) -> String {
-        if let transitionArrayForWord = self.transitionTable[word] {
-            let p = Int(arc4random()) % transitionArrayForWord.count
+        if let transitionDictForWord = self.transitionTable[word] {
             
-            return transitionArrayForWord[p]
+            //Building an array of the entries for this word
+            var arrayOfWords: [String] = []
+            for word in transitionDictForWord.keys {
+                for _ in 0...transitionDictForWord[word]! {
+                    arrayOfWords.append(word)
+                }
+            }
+            
+            let random = Int(arc4random()) % arrayOfWords.count
+            return arrayOfWords[random]
+            
         } else {
             return self.randomWord()
         }
