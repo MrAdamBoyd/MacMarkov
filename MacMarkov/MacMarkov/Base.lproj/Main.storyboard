@@ -702,9 +702,40 @@
                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="xPe-Cv-DVx">
+                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="xPe-Cv-DVx">
                                 <rect key="frame" x="232" y="82" width="16" height="16"/>
                             </progressIndicator>
+                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="eOO-YO-I4j">
+                                <rect key="frame" x="90" y="57" width="300" height="17"/>
+                                <subviews>
+                                    <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="6NZ-aC-oD0">
+                                        <rect key="frame" x="0.0" y="-2" width="230" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="230" id="4EE-FS-sIV"/>
+                                        </constraints>
+                                    </progressIndicator>
+                                    <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="SOx-4d-ZUh">
+                                        <rect key="frame" x="248" y="0.0" width="54" height="17"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="17" id="c1Y-cV-Imb"/>
+                                        </constraints>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="center" title="00.00%" id="ESc-YO-HbZ">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="SOx-4d-ZUh" secondAttribute="bottom" id="0gN-Lz-c9s"/>
+                                    <constraint firstItem="6NZ-aC-oD0" firstAttribute="centerY" secondItem="SOx-4d-ZUh" secondAttribute="centerY" id="X3A-u6-TQB"/>
+                                    <constraint firstItem="6NZ-aC-oD0" firstAttribute="leading" secondItem="eOO-YO-I4j" secondAttribute="leading" id="YHU-kw-4ZX"/>
+                                    <constraint firstItem="SOx-4d-ZUh" firstAttribute="height" secondItem="eOO-YO-I4j" secondAttribute="height" id="bXJ-Xd-KyT"/>
+                                    <constraint firstItem="SOx-4d-ZUh" firstAttribute="top" secondItem="eOO-YO-I4j" secondAttribute="top" id="fjk-dB-mqF"/>
+                                    <constraint firstAttribute="trailing" secondItem="SOx-4d-ZUh" secondAttribute="trailing" id="ncl-by-pxd"/>
+                                    <constraint firstAttribute="width" constant="300" id="uOb-vZ-Ydj"/>
+                                </constraints>
+                            </customView>
                         </subviews>
                         <constraints>
                             <constraint firstItem="7rm-Cy-cxd" firstAttribute="top" secondItem="6Q8-wD-XsL" secondAttribute="bottom" constant="20" id="06f-No-CHU"/>
@@ -713,12 +744,19 @@
                             <constraint firstItem="2um-UQ-0aH" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="Eel-yJ-62F"/>
                             <constraint firstAttribute="trailing" secondItem="7rm-Cy-cxd" secondAttribute="trailing" constant="20" id="Hyh-ab-MiJ"/>
                             <constraint firstItem="6Q8-wD-XsL" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="Pas-kF-rI9"/>
+                            <constraint firstItem="xPe-Cv-DVx" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="al4-PH-t6f"/>
                             <constraint firstItem="2um-UQ-0aH" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="40" id="nxw-RC-8oE"/>
                             <constraint firstAttribute="trailing" secondItem="2um-UQ-0aH" secondAttribute="trailing" constant="20" id="oNb-a9-uhZ"/>
+                            <constraint firstItem="eOO-YO-I4j" firstAttribute="top" secondItem="xPe-Cv-DVx" secondAttribute="bottom" constant="8" id="pZJ-zb-wBV"/>
+                            <constraint firstItem="xPe-Cv-DVx" firstAttribute="top" secondItem="7rm-Cy-cxd" secondAttribute="bottom" constant="24" id="pva-xf-sqs"/>
+                            <constraint firstItem="eOO-YO-I4j" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="uER-5j-ltY"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="generateButton" destination="6Q8-wD-XsL" id="eaR-Mu-cGp"/>
+                        <outlet property="progressIndicator" destination="6NZ-aC-oD0" id="wQc-cD-gEG"/>
+                        <outlet property="progressTextfield" destination="SOx-4d-ZUh" id="0Os-8i-cvK"/>
+                        <outlet property="progressView" destination="eOO-YO-I4j" id="1vT-2B-Wfj"/>
                         <outlet property="resultLabel" destination="7rm-Cy-cxd" id="SU5-yx-pVE"/>
                         <outlet property="spinner" destination="xPe-Cv-DVx" id="hzH-JR-cyy"/>
                         <outlet property="textField" destination="2um-UQ-0aH" id="7BB-vs-UFu"/>

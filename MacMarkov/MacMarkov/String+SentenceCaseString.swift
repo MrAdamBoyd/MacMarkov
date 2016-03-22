@@ -19,6 +19,6 @@ extension String {
     
     
     var sentenceCaseString: String {
-        return self.firstChar.uppercaseString + String(self.characters.dropFirst())
+        return self.firstChar.uppercaseString + String(self.characters.dropFirst()) + "."
     }
 }

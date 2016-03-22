@@ -8,28 +8,19 @@
 
 import Foundation
 
+protocol MarkovGeneratorDelegate {
+    func updateProgress(progress: CGFloat)
+}
+
 class MarkovGenerator {
     
-    private let sentences: [[String]]
     private var transitionTable: [String : [String : Int]] = [:]
     
     var minSentenceLength = 3
     var maxSentenceLength = 20
+    var delegate: MarkovGeneratorDelegate?
     
-    init(sentences: [[String]]) {
-        self.sentences = sentences
-        
-        self.buildTransitionTable()
-    }
-    
-    /**
-     Initialize with one filename
-     
-     - parameter fileName: single file to generate markov chains with
-     
-     - returns: self
-     */
-    convenience init(fileName: String) {
+    func addFileToGenerator(fileName: String) {
         let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "txt")!
         
         let separatedText = (try! String(contentsOfFile: path, encoding: NSUTF8StringEncoding)).componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "\n.")).map { $0.lowercaseString }
@@ -40,19 +31,21 @@ class MarkovGenerator {
         let cleanText3 = cleanText2.map({ $0.stringByReplacingOccurrencesOfString(",", withString: "") })
         let cleanText4 = cleanText3.map({ $0.stringByReplacingOccurrencesOfString("?", withString: "") })
         let cleanText5 = cleanText4.map({ $0.stringByReplacingOccurrencesOfString("!", withString: "") })
+        let cleanText6 = cleanText5.map({ $0.stringByReplacingOccurrencesOfString(".", withString: "") })
+        let sentenceArray = cleanText6.map({ $0.componentsSeparatedByString(" ") })
         
-        let sentenceArray = cleanText5.map({ $0.componentsSeparatedByString(" ") })
-        
-        //At this point, we have an array of an array of string. Each outer array is a sentence and contains an inner array of words in each sentence
-        self.init(sentences: sentenceArray)
+        self.buildTransitionTable(sentenceArray)
     }
     
     /**
      Goes through each sentence and adds it to the transition table
      */
-    private func buildTransitionTable() {
-        for sentence in self.sentences {
+    private func buildTransitionTable(sentences: [[String]]) {
+        var count = 0
+        for sentence in sentences {
             self.addSentenceToTransitionTable(sentence)
+            self.delegate?.updateProgress(CGFloat(count) / CGFloat(sentences.count))
+            count += 1
         }
         
     }
