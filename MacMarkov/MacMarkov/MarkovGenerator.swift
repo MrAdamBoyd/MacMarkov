@@ -22,9 +22,7 @@ class MarkovGenerator {
     var delegate: MarkovGeneratorDelegate?
     
     func addFileToGenerator(fileName: String) {
-        let path = NSBundle.mainBundle().pathForResource(fileName, ofType: "txt")!
-        
-        let separatedText = (try! String(contentsOfFile: path, encoding: NSUTF8StringEncoding)).componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "\n.")).map { $0.lowercaseString }
+        let separatedText = (try! String(contentsOfFile: fileName, encoding: NSUTF8StringEncoding)).componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "\n.")).map { $0.lowercaseString }
         
         //There has to be a better way of doing this, will fix later
         let cleanText1 = separatedText.map({ $0.stringByReplacingOccurrencesOfString(";", withString: "") })

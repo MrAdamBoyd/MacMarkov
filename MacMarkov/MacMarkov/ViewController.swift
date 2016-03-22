@@ -32,7 +32,10 @@ class ViewController: NSViewController, MarkovGeneratorDelegate {
         self.textField.enabled = false
         self.generateButton.enabled = false
         self.resultLabel.enabled = false
-        // Do any additional setup after loading the view.
+        
+        //Setting up the markov generator
+        self.markov = MarkovGenerator()
+        self.markov.delegate = self
     }
 
     override var representedObject: AnyObject? {
@@ -52,18 +55,27 @@ class ViewController: NSViewController, MarkovGeneratorDelegate {
     }
     
     @IBAction func addTextAction(sender: AnyObject) {
-        self.progressView.hidden = false
-        self.spinner.hidden = false
-        self.spinner.startAnimation(self)
-        self.generateButton.enabled = false
-        self.addTextButton.enabled = false
-        let priority = DISPATCH_QUEUE_PRIORITY_HIGH
-        dispatch_async(dispatch_get_global_queue(priority, 0)) {
-            self.markov = MarkovGenerator()
-            self.markov.delegate = self
-            self.markov.addFileToGenerator("allshakespeare")
-        }
-
+        let openPanel = NSOpenPanel()
+        openPanel.allowedFileTypes = ["txt"]
+        openPanel.title = "Choose a file"
+        openPanel.beginWithCompletionHandler({(result:Int) in
+            if(result == NSFileHandlingPanelOKButton)
+            {
+                if let fileURL = openPanel.URL, path = fileURL.path {
+                    self.progressView.hidden = false
+                    self.spinner.hidden = false
+                    self.spinner.startAnimation(self)
+                    self.generateButton.enabled = false
+                    self.addTextButton.enabled = false
+            
+                    //Start markov
+                    let priority = DISPATCH_QUEUE_PRIORITY_HIGH
+                    dispatch_async(dispatch_get_global_queue(priority, 0)) {
+                        self.markov.addFileToGenerator(path)
+                    }
+                }
+            }
+        })
     }
     
     //MARK: - MarkovGeneratorDelegate
