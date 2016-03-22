@@ -25,6 +25,7 @@ class ViewController: NSViewController, MarkovGeneratorDelegate {
         super.viewDidLoad()
         
         self.spinner.hidden = true
+        self.progressView.hidden = true
         self.progressIndicator.doubleValue = 0
         self.progressIndicator.minValue = 0
         self.progressIndicator.maxValue = 100
@@ -51,6 +52,7 @@ class ViewController: NSViewController, MarkovGeneratorDelegate {
     }
     
     @IBAction func addTextAction(sender: AnyObject) {
+        self.progressView.hidden = false
         self.spinner.hidden = false
         self.spinner.startAnimation(self)
         self.generateButton.enabled = false

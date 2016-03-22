@@ -43,9 +43,12 @@ class MarkovGenerator {
      */
     private func buildTransitionTable(sentences: [[String]]) {
         var count = 0
+        let howOftenToNotifyDelegate = sentences.count % 1000 //Number of times it needs to be called
         for sentence in sentences {
             self.addSentenceToTransitionTable(sentence)
-            self.delegate?.updateProgress(CGFloat(count) / CGFloat(sentences.count))
+            if count % howOftenToNotifyDelegate == 0 {
+                self.delegate?.updateProgress(CGFloat(count) / CGFloat(sentences.count))
+            }
             count += 1
         }
         
