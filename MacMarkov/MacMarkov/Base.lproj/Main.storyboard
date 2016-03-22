@@ -685,8 +685,8 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Q8-wD-XsL">
-                                <rect key="frame" x="192" y="152" width="96" height="32"/>
-                                <buttonCell key="cell" type="push" title="Generate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="V04-E3-A2J">
+                                <rect key="frame" x="162" y="152" width="157" height="32"/>
+                                <buttonCell key="cell" type="push" title="Generate Sentence" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="V04-E3-A2J">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
                                 </buttonCell>
@@ -695,7 +695,7 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="7rm-Cy-cxd">
-                                <rect key="frame" x="18" y="122" width="444" height="17"/>
+                                <rect key="frame" x="18" y="91" width="444" height="17"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Enter some text to get started!" id="FVW-iN-tK4">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -703,10 +703,10 @@
                                 </textFieldCell>
                             </textField>
                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="xPe-Cv-DVx">
-                                <rect key="frame" x="232" y="82" width="16" height="16"/>
+                                <rect key="frame" x="232" y="51" width="16" height="16"/>
                             </progressIndicator>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="eOO-YO-I4j">
-                                <rect key="frame" x="90" y="57" width="300" height="17"/>
+                                <rect key="frame" x="90" y="26" width="300" height="17"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="6NZ-aC-oD0">
                                         <rect key="frame" x="0.0" y="-2" width="230" height="21"/>
@@ -736,16 +736,28 @@
                                     <constraint firstAttribute="width" constant="300" id="uOb-vZ-Ydj"/>
                                 </constraints>
                             </customView>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6NR-dd-b02">
+                                <rect key="frame" x="153" y="121" width="175" height="32"/>
+                                <buttonCell key="cell" type="push" title="Add Text to Dictionary" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="U2o-0k-dQN">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="addTextAction:" target="XfG-lQ-9wD" id="oAv-Iv-tNS"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <constraints>
-                            <constraint firstItem="7rm-Cy-cxd" firstAttribute="top" secondItem="6Q8-wD-XsL" secondAttribute="bottom" constant="20" id="06f-No-CHU"/>
                             <constraint firstItem="6Q8-wD-XsL" firstAttribute="top" secondItem="2um-UQ-0aH" secondAttribute="bottom" constant="20" id="1ss-9E-9fj"/>
+                            <constraint firstItem="7rm-Cy-cxd" firstAttribute="top" secondItem="6NR-dd-b02" secondAttribute="bottom" constant="20" id="5cl-F1-Ubv"/>
+                            <constraint firstItem="6NR-dd-b02" firstAttribute="top" secondItem="6Q8-wD-XsL" secondAttribute="bottom" constant="10" id="Bkz-Vh-O7u"/>
                             <constraint firstItem="7rm-Cy-cxd" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="EHI-Cg-oUq"/>
                             <constraint firstItem="2um-UQ-0aH" firstAttribute="leading" secondItem="m2S-Jp-Qdl" secondAttribute="leading" constant="20" id="Eel-yJ-62F"/>
                             <constraint firstAttribute="trailing" secondItem="7rm-Cy-cxd" secondAttribute="trailing" constant="20" id="Hyh-ab-MiJ"/>
                             <constraint firstItem="6Q8-wD-XsL" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="Pas-kF-rI9"/>
                             <constraint firstItem="xPe-Cv-DVx" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="al4-PH-t6f"/>
                             <constraint firstItem="2um-UQ-0aH" firstAttribute="top" secondItem="m2S-Jp-Qdl" secondAttribute="top" constant="40" id="nxw-RC-8oE"/>
+                            <constraint firstItem="6NR-dd-b02" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="oNJ-cu-AHs"/>
                             <constraint firstAttribute="trailing" secondItem="2um-UQ-0aH" secondAttribute="trailing" constant="20" id="oNb-a9-uhZ"/>
                             <constraint firstItem="eOO-YO-I4j" firstAttribute="top" secondItem="xPe-Cv-DVx" secondAttribute="bottom" constant="8" id="pZJ-zb-wBV"/>
                             <constraint firstItem="xPe-Cv-DVx" firstAttribute="top" secondItem="7rm-Cy-cxd" secondAttribute="bottom" constant="24" id="pva-xf-sqs"/>
@@ -753,6 +765,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addTextButton" destination="6NR-dd-b02" id="brp-ZB-f8Q"/>
                         <outlet property="generateButton" destination="6Q8-wD-XsL" id="eaR-Mu-cGp"/>
                         <outlet property="progressIndicator" destination="6NZ-aC-oD0" id="wQc-cD-gEG"/>
                         <outlet property="progressTextfield" destination="SOx-4d-ZUh" id="0Os-8i-cvK"/>

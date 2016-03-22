@@ -10,6 +10,7 @@ import Foundation
 
 protocol MarkovGeneratorDelegate {
     func updateProgress(progress: CGFloat)
+    func finishedFile()
 }
 
 class MarkovGenerator {
@@ -47,6 +48,8 @@ class MarkovGenerator {
             self.delegate?.updateProgress(CGFloat(count) / CGFloat(sentences.count))
             count += 1
         }
+        
+        self.delegate?.finishedFile()
         
     }
     
