@@ -25,13 +25,8 @@ class MarkovGenerator {
         let separatedText = (try! String(contentsOfFile: fileName, encoding: NSUTF8StringEncoding)).componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "\n.")).map { $0.lowercaseString }
         
         //There has to be a better way of doing this, will fix later
-        let cleanText1 = separatedText.map({ $0.stringByReplacingOccurrencesOfString(";", withString: "") })
-        let cleanText2 = cleanText1.map({ $0.stringByReplacingOccurrencesOfString(":", withString: "") })
-        let cleanText3 = cleanText2.map({ $0.stringByReplacingOccurrencesOfString(",", withString: "") })
-        let cleanText4 = cleanText3.map({ $0.stringByReplacingOccurrencesOfString("?", withString: "") })
-        let cleanText5 = cleanText4.map({ $0.stringByReplacingOccurrencesOfString("!", withString: "") })
-        let cleanText6 = cleanText5.map({ $0.stringByReplacingOccurrencesOfString(".", withString: "") })
-        let sentenceArray = cleanText6.map({ $0.componentsSeparatedByString(" ") })
+        let cleanedText = separatedText.map({ self.cleanText($0) })
+        let sentenceArray = cleanedText.map({ $0.componentsSeparatedByString(" ") })
         
         self.buildTransitionTable(sentenceArray)
     }
@@ -148,7 +143,7 @@ class MarkovGenerator {
             if currentWord == "$" {
                 if i > self.minSentenceLength {
                     let resultString = result.reduce("", combine: { ($0=="") ? "\($0)\($1)" : "\($0) \($1)" })
-                    return "\(resultString.sentenceCaseString)."
+                    return "\(resultString.sentenceCaseString)"
                 } else {
                     currentWord = self.randomWord()
                 }
@@ -159,7 +154,19 @@ class MarkovGenerator {
         
         
         let resultString = result.reduce("", combine: { ($0=="") ? "\($0)\($1)" : "\($0) \($1)" })
-        return "\(resultString.sentenceCaseString)."
+        return "\(resultString.sentenceCaseString)"
+    }
+    
+    /**
+     Removes all but alphanumeric and "-" from string
+     
+     - parameter text: text to clean
+     
+     - returns: text without any special characters
+     */
+    private func cleanText(text: String) -> String {
+        let chars = Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890".characters)
+        return String(text.characters.filter { chars.contains($0) })
     }
     
 }

@@ -8,7 +8,7 @@
 
 import Cocoa
 
-class ViewController: NSViewController, MarkovGeneratorDelegate {
+class ViewController: NSViewController, MarkovGeneratorDelegate, NSTextFieldDelegate {
 
     var markov: MarkovGenerator!
     
@@ -29,6 +29,7 @@ class ViewController: NSViewController, MarkovGeneratorDelegate {
         self.progressIndicator.doubleValue = 0
         self.progressIndicator.minValue = 0
         self.progressIndicator.maxValue = 100
+        self.textField.delegate = self
         self.textField.enabled = false
         self.generateButton.enabled = false
         self.resultLabel.enabled = false
@@ -99,6 +100,11 @@ class ViewController: NSViewController, MarkovGeneratorDelegate {
             self.generateButton.enabled = true
             self.resultLabel.enabled = true
         }
+    }
+    
+    //MARK: - NSTextFieldDelegate
+    override func controlTextDidEndEditing(obj: NSNotification) {
+        self.generateAction(self.generateButton)
     }
 }
 
