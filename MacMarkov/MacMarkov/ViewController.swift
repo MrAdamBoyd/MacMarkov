@@ -24,55 +24,47 @@ class ViewController: NSViewController, MarkovGeneratorDelegate, NSTextFieldDele
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.spinner.hidden = true
-        self.progressView.hidden = true
+        self.spinner.isHidden = true
+        self.progressView.isHidden = true
         self.progressIndicator.doubleValue = 0
         self.progressIndicator.minValue = 0
         self.progressIndicator.maxValue = 100
         self.textField.delegate = self
-        self.textField.enabled = false
-        self.generateButton.enabled = false
-        self.resultLabel.enabled = false
+        self.textField.isEnabled = false
+        self.generateButton.isEnabled = false
+        self.resultLabel.isEnabled = false
         
         //Setting up the markov generator
         self.markov = MarkovGenerator()
         self.markov.delegate = self
     }
 
-    override var representedObject: AnyObject? {
-        didSet {
-        // Update the view, if already loaded.
-        }
-    }
-
-
     /**
      User hit the generate button, use the markov generator to make a sentence and then set the text
      
      - parameter sender: generate button
      */
-    @IBAction func generateAction(sender: AnyObject) {
-        self.resultLabel.stringValue = self.markov.generateSentence(self.textField.stringValue)
+    @IBAction func generateAction(_ sender: AnyObject) {
+        self.resultLabel.stringValue = self.markov.generateSentence(withSeedString: self.textField.stringValue)
     }
     
-    @IBAction func addTextAction(sender: AnyObject) {
+    @IBAction func addTextAction(_ sender: AnyObject) {
         let openPanel = NSOpenPanel()
         openPanel.allowedFileTypes = ["txt"]
         openPanel.title = "Choose a file"
-        openPanel.beginWithCompletionHandler({(result:Int) in
+        openPanel.begin(completionHandler: {(result:Int) in
             if(result == NSFileHandlingPanelOKButton)
             {
-                if let fileURL = openPanel.URL, path = fileURL.path {
-                    self.progressView.hidden = false
-                    self.spinner.hidden = false
+                if let fileURL = openPanel.url {
+                    self.progressView.isHidden = false
+                    self.spinner.isHidden = false
                     self.spinner.startAnimation(self)
-                    self.generateButton.enabled = false
-                    self.addTextButton.enabled = false
+                    self.generateButton.isEnabled = false
+                    self.addTextButton.isEnabled = false
             
                     //Start markov
-                    let priority = DISPATCH_QUEUE_PRIORITY_HIGH
-                    dispatch_async(dispatch_get_global_queue(priority, 0)) {
-                        self.markov.addFileToGenerator(path)
+                    DispatchQueue.global(qos: .userInitiated).async {
+                        self.markov.addFileToGenerator(fileURL.path)
                     }
                 }
             }
@@ -81,29 +73,29 @@ class ViewController: NSViewController, MarkovGeneratorDelegate, NSTextFieldDele
     
     //MARK: - MarkovGeneratorDelegate
     
-    func updateProgress(progress: CGFloat) {
-        dispatch_async(dispatch_get_main_queue()) {
+    func updateProgress(_ progress: CGFloat) {
+        DispatchQueue.main.async {
             self.progressTextfield.stringValue = String(format: "%.2f%", progress * 100) + "%"
             let difference = (Double(progress) * 100) - self.progressIndicator.doubleValue
-            self.progressIndicator.incrementBy(difference)
+            self.progressIndicator.increment(by: difference)
         }
     }
     
     func finishedFile() {
-        dispatch_async(dispatch_get_main_queue()) {
+        DispatchQueue.main.async {
             //When done loading, stop the spinner
             self.spinner.stopAnimation(self)
-            self.spinner.hidden = true
-            self.progressView.hidden = true
-            self.addTextButton.enabled = true
-            self.textField.enabled = true
-            self.generateButton.enabled = true
-            self.resultLabel.enabled = true
+            self.spinner.isHidden = true
+            self.progressView.isHidden = true
+            self.addTextButton.isEnabled = true
+            self.textField.isEnabled = true
+            self.generateButton.isEnabled = true
+            self.resultLabel.isEnabled = true
         }
     }
     
     //MARK: - NSTextFieldDelegate
-    override func controlTextDidEndEditing(obj: NSNotification) {
+    override func controlTextDidEndEditing(_ obj: Notification) {
         self.generateAction(self.generateButton)
     }
 }

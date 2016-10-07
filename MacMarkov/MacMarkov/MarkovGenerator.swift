@@ -9,24 +9,24 @@
 import Foundation
 
 protocol MarkovGeneratorDelegate {
-    func updateProgress(progress: CGFloat)
+    func updateProgress(_ progress: CGFloat)
     func finishedFile()
 }
 
 class MarkovGenerator {
     
-    private var transitionTable: [String : [String : Int]] = [:]
+    fileprivate var transitionTable: [String : [String : Int]] = [:]
     
     var minSentenceLength = 3
     var maxSentenceLength = 20
     var delegate: MarkovGeneratorDelegate?
     
-    func addFileToGenerator(fileName: String) {
-        let separatedText = (try! String(contentsOfFile: fileName, encoding: NSUTF8StringEncoding)).componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: "\n.")).map { $0.lowercaseString }
+    func addFileToGenerator(_ fileName: String) {
+        let separatedText = (try! String(contentsOfFile: fileName, encoding: String.Encoding.utf8)).components(separatedBy: CharacterSet(charactersIn: "\n.")).map { $0.lowercased() }
         
         //There has to be a better way of doing this, will fix later
         let cleanedText = separatedText.map({ self.cleanText($0) })
-        let sentenceArray = cleanedText.map({ $0.componentsSeparatedByString(" ") })
+        let sentenceArray = cleanedText.map({ $0.components(separatedBy: " ") })
         
         self.buildTransitionTable(sentenceArray)
     }
@@ -34,7 +34,7 @@ class MarkovGenerator {
     /**
      Goes through each sentence and adds it to the transition table
      */
-    private func buildTransitionTable(sentences: [[String]]) {
+    fileprivate func buildTransitionTable(_ sentences: [[String]]) {
         var count = 0
         let howOftenToNotifyDelegate = sentences.count % 1000 //Number of times it needs to be called
         for sentence in sentences {
@@ -54,11 +54,11 @@ class MarkovGenerator {
      
      - parameter sentence: sentence to add
      */
-    private func addSentenceToTransitionTable(sentence: [String]) {
+    fileprivate func addSentenceToTransitionTable(_ sentence: [String]) {
         
         for index in 0..<sentence.count {
             
-            let word = String(sentence[index])
+            let word = String(sentence[index])!
             var nextWord = "$" //Special character
             if index < sentence.count - 1 {
                 nextWord = String(sentence[index + 1])
@@ -88,7 +88,7 @@ class MarkovGenerator {
      
      - returns: new word randomly chosen based on analyzed text
      */
-    private func generateNextWord(word: String) -> String {
+    fileprivate func generateNextWord(_ word: String) -> String {
         if let transitionDictForWord = self.transitionTable[word] {
             
             //Building an array of the entries for this word
@@ -112,7 +112,7 @@ class MarkovGenerator {
      
      - returns: random word
      */
-    private func randomWord() -> String {
+    fileprivate func randomWord() -> String {
         let keyArray = Array(self.transitionTable.keys)
         return keyArray[Int(arc4random()) % keyArray.count]
     }
@@ -124,9 +124,9 @@ class MarkovGenerator {
      
      - returns: sentence based off of start word
      */
-    func generateSentence(startString: String = "") -> String {
+    func generateSentence(withSeedString startString: String = "") -> String {
         
-        let startStringArray = startString.componentsSeparatedByString(" ")
+        let startStringArray = startString.components(separatedBy: " ")
         
         var currentWord = self.randomWord()
         var result: [String] = []
@@ -142,7 +142,7 @@ class MarkovGenerator {
             
             if currentWord == "$" {
                 if i > self.minSentenceLength {
-                    let resultString = result.reduce("", combine: { ($0=="") ? "\($0)\($1)" : "\($0) \($1)" })
+                    let resultString = result.reduce("", { ($0 == "") ? "\($0)\($1)" : "\($0) \($1)" })
                     return "\(resultString.sentenceCaseString)"
                 } else {
                     currentWord = self.randomWord()
@@ -153,7 +153,7 @@ class MarkovGenerator {
         }
         
         
-        let resultString = result.reduce("", combine: { ($0=="") ? "\($0)\($1)" : "\($0) \($1)" })
+        let resultString = result.reduce("", { ($0 == "") ? "\($0)\($1)" : "\($0) \($1)" })
         return "\(resultString.sentenceCaseString)"
     }
     
@@ -164,7 +164,7 @@ class MarkovGenerator {
      
      - returns: text without any special characters
      */
-    private func cleanText(text: String) -> String {
+    fileprivate func cleanText(_ text: String) -> String {
         let chars = Set("abcdefghijklmnopqrstuvwxyz ABCDEFGHIJKLKMNOPQRSTUVWXYZ1234567890".characters)
         return String(text.characters.filter { chars.contains($0) })
     }
