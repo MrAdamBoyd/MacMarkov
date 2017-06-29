@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A319" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="13122.19" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
         <deployment identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11201"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="13122.19"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -674,10 +675,7 @@
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2um-UQ-0aH">
-                                <rect key="frame" x="20" y="200" width="440" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="30" id="6uh-6l-R9x"/>
-                                </constraints>
+                                <rect key="frame" x="20" y="208" width="440" height="22"/>
                                 <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" alignment="center" placeholderString="Enter a start string (optional)" drawsBackground="YES" id="ivv-yZ-mzz">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
@@ -685,7 +683,7 @@
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6Q8-wD-XsL">
-                                <rect key="frame" x="162" y="152" width="157" height="32"/>
+                                <rect key="frame" x="162" y="160" width="157" height="32"/>
                                 <buttonCell key="cell" type="push" title="Generate Sentence" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="V04-E3-A2J">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>
@@ -695,7 +693,7 @@
                                 </connections>
                             </button>
                             <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="7rm-Cy-cxd">
-                                <rect key="frame" x="18" y="91" width="444" height="17"/>
+                                <rect key="frame" x="18" y="99" width="444" height="17"/>
                                 <textFieldCell key="cell" sendsActionOnEndEditing="YES" alignment="center" title="Enter some text to get started!" id="FVW-iN-tK4">
                                     <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -703,10 +701,10 @@
                                 </textFieldCell>
                             </textField>
                             <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="xPe-Cv-DVx">
-                                <rect key="frame" x="232" y="51" width="16" height="16"/>
+                                <rect key="frame" x="232" y="59" width="16" height="16"/>
                             </progressIndicator>
                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="eOO-YO-I4j">
-                                <rect key="frame" x="90" y="26" width="300" height="17"/>
+                                <rect key="frame" x="90" y="34" width="300" height="17"/>
                                 <subviews>
                                     <progressIndicator wantsLayer="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="6NZ-aC-oD0">
                                         <rect key="frame" x="0.0" y="-1" width="230" height="20"/>
@@ -737,7 +735,7 @@
                                 </constraints>
                             </customView>
                             <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="6NR-dd-b02">
-                                <rect key="frame" x="153" y="121" width="175" height="32"/>
+                                <rect key="frame" x="153" y="129" width="175" height="32"/>
                                 <buttonCell key="cell" type="push" title="Add Text to Dictionary" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="U2o-0k-dQN">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                     <font key="font" metaFont="system"/>

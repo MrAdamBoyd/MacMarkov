@@ -52,9 +52,8 @@ class ViewController: NSViewController, MarkovGeneratorDelegate, NSTextFieldDele
         let openPanel = NSOpenPanel()
         openPanel.allowedFileTypes = ["txt"]
         openPanel.title = "Choose a file"
-        openPanel.begin(completionHandler: {(result:Int) in
-            if(result == NSFileHandlingPanelOKButton)
-            {
+        openPanel.begin() { [unowned self] result in
+            if result == .OK {
                 if let fileURL = openPanel.url {
                     self.progressView.isHidden = false
                     self.spinner.isHidden = false
@@ -68,7 +67,7 @@ class ViewController: NSViewController, MarkovGeneratorDelegate, NSTextFieldDele
                     }
                 }
             }
-        })
+        }
     }
     
     //MARK: - MarkovGeneratorDelegate
@@ -82,7 +81,7 @@ class ViewController: NSViewController, MarkovGeneratorDelegate, NSTextFieldDele
     }
     
     func finishedFile() {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [unowned self] in
             //When done loading, stop the spinner
             self.spinner.stopAnimation(self)
             self.spinner.isHidden = true
